@@ -16,11 +16,9 @@ def detail(request, workflow_slug):
         raise Http404("Workflow does not exist")
 
     data = {
-        'workflow_title': workflow.title,
-        'workflow_creation_date': workflow.date_created,
         'num_logs': count_logs(workflow),
         'impact': impact(workflow),
         'response_time_series': response_time_series(workflow, 10),
     }
 
-    return render(request, 'threebot_stats/workflow_stats.html', {'data': data})
+    return render(request, 'threebot_stats/workflow_stats.html', {'data': data, 'workflow': workflow})
