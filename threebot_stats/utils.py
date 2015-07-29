@@ -19,7 +19,9 @@ def _executed_logs(workflow):
 
 def average_response_time(workflow):
     times = [response_time(log) for log in _executed_logs(workflow)]
-    return sum(times) / float(len(times))
+    if times:
+        return sum(times) / float(len(times))
+    return 0
 
 
 ''' Response times of last n logs in seconds, as a list '''
