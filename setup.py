@@ -25,7 +25,7 @@ history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 classifiers = [c for c in open('classifiers').read().splitlines() if '#' not in c]
 
 setup(
-    name='3bot-stats',
+    name='threebot-stats',
     version=version,
     description="""Your project description goes here""",
     long_description=readme + '\n\n' + history,
