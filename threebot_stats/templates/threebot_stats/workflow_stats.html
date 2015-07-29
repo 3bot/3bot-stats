@@ -1,3 +1,5 @@
+{% load threebot_stats_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,9 +9,11 @@
   </head>
   <body>
   <div class='container'>
-   <h1>Stats for Workflow "{{ data.workflow_title }}"</h1>
+   <h1>Stats for Workflow "{{ workflow.title }}"</h1>
    <ul>
-        <li>{{ data.num_logs }} logs since {{ data.workflow_creation_date }}</li>
+        <li>{{ data.num_logs }} logs since {{ workflow.date_created }}</li>
+       {% avg_response_time workflow as avg_time %}
+       <li>Mean response time: {{ avg_time }} seconds</li>
        <li>Impact score: <span class="badge">{{ data.impact }}</span></li>
    </ul>
    <canvas id="time-chart" width="400" height="400"></canvas>
