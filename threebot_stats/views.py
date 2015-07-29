@@ -9,14 +9,13 @@ def index(request):
     return HttpResponse("Hello, world.")
 
 
-def detail(request, workflow_id):
+def detail(request, workflow_slug):
     try:
-        workflow = Workflow.objects.get(unique_identifier=workflow_id)
+        workflow = Workflow.objects.get(slug=workflow_slug)
     except Workflow.DoesNotExist:
         raise Http404("Workflow does not exist")
 
     data = {
-        'workflow_id': workflow.unique_identifier,
         'workflow_title': workflow.title,
         'workflow_creation_date': workflow.date_created,
         'num_logs': count_logs(workflow),
