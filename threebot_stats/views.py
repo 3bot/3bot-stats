@@ -1,14 +1,27 @@
-#from django.contrib.auth.decorators import login_required
-#from django.shortcuts import render_to_response
-#from django.shortcuts import get_object_or_404
-#from django.template import RequestContext
-#from django.shortcuts import redirect
-#from django.template.defaultfilters import slugify
-#from django.core.urlresolvers import reverse
-#from django.http import Http404
-#from django.http import HttpResponseForbidden
-#from django.http import HttpResponseServerError
-#from django.http import HttpResponseRedirect
+from django.http import Http404, HttpResponse
+from django.shortcuts import render
 
-# class YourView(TemplateView):
-#    template_name = 'threebot_stats/default.html'
+from threebot.models import Workflow
+from threebot_stats.utils import *
+
+
+def index(request):
+    return HttpResponse("Hello, world.")
+
+
+def detail(request, workflow_id):
+    try:
+        workflow = Workflow.objects.get(unique_identifier=workflow_id)
+    except Workflow.DoesNotExist:
+        raise Http404("Workflow does not exist")
+
+    data = {
+        'workflow_id': workflow.unique_identifier,
+        'workflow_title': workflow.title,
+        'workflow_creation_date': workflow.date_created,
+        'num_logs': count_logs(workflow),
+        'impact': impact(workflow),
+        'response_time_series': response_time_series(workflow, 10),
+    }
+
+    return render(request, 'threebot_stats/workflow_stats.html', {'data': data})
