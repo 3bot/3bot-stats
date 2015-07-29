@@ -26,29 +26,31 @@
 
       var response_time_series = {{ data.response_time_series | safe }};
 
-        var labels = [];
-        for (var i = 0; i < response_time_series.length; i++) {
-            labels.push(i);
-        }
+      var labels = [];
+      for (var i = 0; i < response_time_series.length; i++) {
+          labels.push(i);
+      }
+
+      Chart.defaults.global.scaleBeginAtZero = true;
+
       var data = {
-        labels: labels,
-        datasets: [
-            {
-                label: "Execution time in seconds",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: response_time_series,
-            },
-        ],
-    };
+            labels: labels,
+            datasets: [
+                {
+                    label: "Execution time in seconds",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "rgba(220,220,220,1)",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: response_time_series,
+                },
+            ],
+      };
 
       var options = {};
-
-
+      
       var ctx = $("#time-chart").get(0).getContext("2d");
       var timeChart = new Chart(ctx).Line(data, options);
 
