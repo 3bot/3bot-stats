@@ -10,10 +10,6 @@ def index(request):
 
 
 def detail(request, workflow_slug):
-    try:
-        workflow = Workflow.objects.get(slug=workflow_slug)
-    except Workflow.DoesNotExist:
-        raise Http404("Workflow does not exist")
 
     data = {
         'num_logs': count_logs(workflow),
