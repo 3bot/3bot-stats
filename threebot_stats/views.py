@@ -12,9 +12,15 @@ def index(request):
 
 
 def detail(request, workflow_slug):
+    default_graph_items = 10
     orgs = get_my_orgs(request)
     workflow = get_object_or_404(Workflow, owner__in=orgs, slug=workflow_slug)
-    graph_items = request.GET.get('graph-items', 10)
+    graph_items = request.GET.get('graph-items', default_graph_items)
+
+    try:
+        graph_items = int(graph_items)
+    except ValueError:
+        graph_items = default_graph_items
 
     data = {
         'num_logs': count_logs(workflow),
