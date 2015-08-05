@@ -19,7 +19,7 @@ def detail(request, workflow_slug):
     data = {
         'num_logs': count_logs(workflow),
         'impact': impact(workflow),
-        'response_time_series': response_time_series(workflow, 10),
+        'response_time_series': response_time_series(workflow, n=graph_items),
     }
 
     return render(request, 'threebot_stats/workflow_stats.html', {'data': data, 'workflow': workflow})
