@@ -28,7 +28,7 @@ def average_response_time(workflow):
 
 def response_time_series(workflow, n=10):
     ''' Response times of last n logs in seconds, as a list '''
-    recent_logs = list(_executed_logs(workflow).order_by('-date_finished'))[-n:]
+    recent_logs = list(_executed_logs(workflow).order_by('date_finished'))[-n:]
     return [response_time(log) for log in recent_logs]
 
 
