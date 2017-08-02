@@ -13,14 +13,16 @@ def response_time(workflow_log):
     return diff.total_seconds()
 
 
-def _executed_logs(workflow):
+def _executed_logs(workflow, quantity=None):
     ''' Filter logs with start and end time '''
+    if quantity:
+        return workflow.workflowlog_set.exclude(date_finished__isnull=True, date_started__isnull=True)[:quantity]
     return workflow.workflowlog_set.exclude(date_finished__isnull=True, date_started__isnull=True)
 
 
 def average_response_time(workflow):
     ''' Calculates the average response time for a given workflow '''
-    times = [response_time(log) for log in _executed_logs(workflow)]
+    times = [response_time(log) for log in _executed_logs(workflow, quantity=100)]
     if times:
         return sum(times) / float(len(times))
     return 0
