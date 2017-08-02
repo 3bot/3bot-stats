@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from threebot.models import Workflow
-from threebot_stats.utils import response_time_series, count_logs, impact
 from threebot.utils import get_my_orgs
+from threebot_stats.utils import response_time_series, count_logs, impact
 
 
 def index(request):
