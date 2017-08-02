@@ -1,5 +1,9 @@
 # 3bot-stats
 
+[![Build Status](https://travis-ci.org/3bot/3bot-stats.svg?branch=master)](https://travis-ci.org/3bot/3bot-stats)
+[![Coverage Status](https://coveralls.io/repos/3bot/3bot-stats/badge.svg?branch=master&service=github)](https://coveralls.io/github/3bot/3bot-stats?branch=master)
+[![PyPI](https://img.shields.io/pypi/v/threebot-stats.svg)](https://pypi.python.org/pypi/threebot-stats)
+
 > Statistics and Performance monitoring for [3bot](https://github.com/3bot/3bot).
 
 ## Quickstart
